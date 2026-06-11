@@ -596,11 +596,11 @@ function showResult(){
 
   /* Links por etapa: reemplaza cada URL por el link real de descarga de cada guía */
   const GUIDE_LINKS = {
-    espera:  'REEMPLAZAR_LINK_GUIA_ESPERA',
-    alerta:  'REEMPLAZAR_LINK_GUIA_ALERTA',
-    busqueda:'REEMPLAZAR_LINK_GUIA_BUSQUEDA',
-    culpa:   'REEMPLAZAR_LINK_GUIA_CULPA',
-    recaida: 'REEMPLAZAR_LINK_GUIA_RECAIDA'
+    espera:  'Guia_Ruptura_La_Espera.pdf',
+    alerta:  'Guia_Ruptura_La_Alerta.pdf',
+    busqueda:'Guia_Ruptura_La_Busqueda.pdf',
+    culpa:   'Guia_Ruptura_La_Culpa.pdf',
+    recaida: 'Guia_Ruptura_La_Recaida.pdf'
   };
   document.getElementById('guideLink').href = GUIDE_LINKS[finalStage];
 
