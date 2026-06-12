@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>¿Por qué no puedo soltarlo? — Diagnóstico | Transformación y Luz</title>
+<title>¿Por qué no puedes soltarlo, aunque sabes que te hace daño? — Diagnóstico</title>
+<meta name="description" content="Test de 3 minutos basado en psicología del apego: descubre en cuál de las 5 etapas del ciclo está atrapado tu patrón y qué lo rompe en tu caso.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -26,601 +27,411 @@
     font-family:'Montserrat',sans-serif;
     background:var(--cream);
     color:var(--ink);
-    min-height:100vh;
-    line-height:1.6;
+    font-size:15.5px;
+    line-height:1.7;
   }
-  .wrap{max-width:560px;margin:0 auto;padding:0 22px 60px;}
+  .wrap{max-width:620px;margin:0 auto;padding:0 22px;}
+  section{padding:54px 0;}
 
-  /* ---------- progress ---------- */
-  #progressBar{
-    position:fixed;top:0;left:0;height:4px;width:0%;
-    background:var(--gold);z-index:50;
-    transition:width .45s ease;
-  }
-
-  /* ---------- screens ---------- */
-  .screen{display:none;animation:fadeUp .55s ease both;}
-  .screen.active{display:block;}
-  @keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
-  @media (prefers-reduced-motion: reduce){
-    .screen{animation:none;}
-    #progressBar{transition:none;}
+  /* ---------- top bar ---------- */
+  .topbar{
+    text-align:center;padding:18px 0 14px;
+    font-size:11px;font-weight:600;letter-spacing:.3em;
+    text-transform:uppercase;color:var(--gold);
   }
 
-  /* ---------- intro ---------- */
-  .intro{padding-top:70px;text-align:center;}
-  .brand{
-    font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;
-    letter-spacing:.28em;text-transform:uppercase;color:var(--gold);
-    margin-bottom:34px;
+  /* ---------- hero ---------- */
+  .hero{padding:0 0 50px;text-align:center;}
+  .hero img{
+    width:100%;max-width:460px;display:block;margin:0 auto 8px;
+    border-radius:18px;
   }
-  h1{
-    font-family:'Playfair Display',serif;
-    font-size:clamp(30px,7.5vw,42px);
-    font-weight:600;line-height:1.22;letter-spacing:-.01em;
-    margin-bottom:22px;
-  }
-  .intro p{color:var(--ink-soft);font-size:15.5px;max-width:430px;margin:0 auto 16px;}
-  .intro .calm{
+  .hero .open-loop{
     font-family:'Cormorant Garamond',serif;font-style:italic;
-    font-size:21px;color:var(--ink);margin:30px auto 8px;
+    font-size:20px;color:var(--ink-soft);
+    max-width:460px;margin:22px auto 0;
   }
-  .meta{font-size:12.5px;color:var(--ink-soft);letter-spacing:.06em;margin-top:26px;}
+
+  /* ---------- type ---------- */
+  h1{
+    position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);
+  }
+  h2{
+    font-family:'Playfair Display',serif;font-weight:600;
+    font-size:clamp(25px,6vw,32px);line-height:1.25;
+    margin-bottom:22px;letter-spacing:-.01em;
+  }
+  p{margin-bottom:14px;}
+  .soft{color:var(--ink-soft);}
+  em{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1em;}
+  strong{font-weight:700;}
 
   /* ---------- buttons ---------- */
   .btn{
-    display:inline-block;border:none;cursor:pointer;
-    font-family:'Montserrat',sans-serif;font-weight:600;font-size:14.5px;
-    letter-spacing:.06em;text-transform:uppercase;
+    display:inline-block;border:none;cursor:pointer;text-decoration:none;
+    font-family:'Montserrat',sans-serif;font-weight:700;font-size:14.5px;
+    letter-spacing:.06em;text-transform:uppercase;text-align:center;
     background:var(--ink);color:var(--cream);
-    padding:18px 38px;border-radius:60px;
-    margin-top:34px;text-decoration:none;
+    padding:19px 36px;border-radius:60px;
     transition:transform .2s ease, background .2s ease;
   }
   .btn:hover{transform:translateY(-2px);background:#241b15;}
   .btn.gold{background:var(--gold);color:#fff;}
   .btn.gold:hover{background:#9a7a49;}
-  .btn.ghost{
-    background:transparent;color:var(--ink);
-    border:1.5px solid var(--ink);
-  }
   .btn:focus-visible{outline:3px solid var(--gold);outline-offset:3px;}
+  .cta-block{text-align:center;margin-top:30px;}
+  .cta-note{
+    font-size:12.5px;color:var(--ink-soft);margin-top:12px;letter-spacing:.04em;
+  }
 
-  /* ---------- questions ---------- */
-  .quiz{padding-top:64px;}
-  .qcount{
-    font-size:11.5px;font-weight:600;letter-spacing:.24em;
-    text-transform:uppercase;color:var(--gold);margin-bottom:18px;
+  /* ---------- mirror bands (firma) ---------- */
+  .mirror-band{
+    background:var(--night);color:var(--night-text);
+    text-align:center;padding:64px 22px;
   }
-  .qtext{
-    font-family:'Playfair Display',serif;
-    font-size:clamp(22px,5.6vw,28px);font-weight:600;line-height:1.3;
-    margin-bottom:30px;
-  }
-  .opt{
-    display:block;width:100%;text-align:left;cursor:pointer;
-    background:var(--card);border:1.5px solid var(--line);
-    border-radius:16px;padding:18px 20px;margin-bottom:13px;
-    font-family:'Montserrat',sans-serif;font-size:14.5px;font-weight:500;
-    color:var(--ink);line-height:1.55;
-    transition:border-color .18s ease, background .18s ease, transform .18s ease;
-  }
-  .opt:hover{border-color:var(--gold);background:#fffdf8;}
-  .opt:active{transform:scale(.985);}
-  .opt:focus-visible{outline:3px solid var(--gold);outline-offset:2px;}
-
-  /* ---------- mirror interludes ---------- */
-  body.night-mode{background:var(--night);}
-  .mirror{
-    min-height:100vh;display:flex;flex-direction:column;
-    justify-content:center;align-items:center;text-align:center;
-    padding:40px 28px;color:var(--night-text);
-  }
-  .mirror .phrase{
+  .mirror-band .phrase{
     font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;
-    font-size:clamp(24px,6.5vw,34px);line-height:1.45;max-width:520px;
+    font-size:clamp(22px,5.5vw,29px);line-height:1.5;max-width:540px;margin:0 auto;
   }
-  .mirror .sub{
-    margin-top:26px;font-size:12px;letter-spacing:.22em;text-transform:uppercase;
+  .mirror-band .who{
+    margin-top:20px;font-size:11px;letter-spacing:.24em;text-transform:uppercase;
     color:var(--gold-soft);font-weight:600;
   }
-  .mirror .btn{background:var(--gold);color:#fff;}
 
-  /* ---------- calculating ---------- */
-  .calc{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;color:var(--night-text);text-align:center;padding:0 30px;}
-  .calc .dots{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:26px;}
-  .pulse{
-    width:54px;height:54px;border-radius:50%;
-    border:2px solid var(--gold);margin-bottom:30px;
-    animation:pulse 1.6s ease-in-out infinite;
+  /* ---------- lists & cards ---------- */
+  .tick-list{list-style:none;}
+  .tick-list li{
+    padding:16px 18px 16px 46px;position:relative;margin-bottom:12px;
+    background:var(--card);border:1.5px solid var(--line);border-radius:14px;
   }
-  @keyframes pulse{0%,100%{transform:scale(1);opacity:.55;}50%{transform:scale(1.18);opacity:1;}}
-  @media (prefers-reduced-motion: reduce){.pulse{animation:none;}}
+  .tick-list li::before{
+    content:"";position:absolute;left:18px;top:22px;
+    width:11px;height:11px;border-radius:50%;border:2.5px solid var(--gold);
+  }
+  .check-list{list-style:none;}
+  .check-list li{
+    padding-left:30px;position:relative;margin-bottom:13px;
+  }
+  .check-list li::before{
+    content:"✓";position:absolute;left:0;top:0;
+    color:var(--gold);font-weight:700;font-size:17px;
+  }
 
-  /* ---------- result ---------- */
-  .result{padding-top:60px;}
-  .stage-eyebrow{
-    text-align:center;font-size:11.5px;font-weight:600;letter-spacing:.26em;
-    text-transform:uppercase;color:var(--gold);margin-bottom:14px;
+  /* ---------- ciclo visual ---------- */
+  .ciclo{
+    display:flex;flex-wrap:wrap;justify-content:center;align-items:center;
+    gap:8px;margin:26px 0;
   }
-  .stage-name{
-    font-family:'Playfair Display',serif;text-align:center;
-    font-size:clamp(34px,9vw,50px);font-weight:700;margin-bottom:6px;
-  }
-  .stage-tag{
-    text-align:center;font-family:'Cormorant Garamond',serif;font-style:italic;
-    font-size:20px;color:var(--ink-soft);margin-bottom:38px;
-  }
-  .block{
-    background:var(--card);border:1.5px solid var(--line);
-    border-radius:20px;padding:26px 24px;margin-bottom:20px;
-  }
-  .block h3{
-    font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;
-    letter-spacing:.2em;text-transform:uppercase;color:var(--gold);
-    margin-bottom:14px;
-  }
-  .block p{font-size:14.5px;color:var(--ink);margin-bottom:12px;}
-  .block p:last-child{margin-bottom:0;}
-  .block .soft{color:var(--ink-soft);}
-  .block ul{list-style:none;}
-  .block li{
-    font-size:14.5px;padding-left:26px;position:relative;margin-bottom:12px;
-  }
-  .block li::before{
-    content:"";position:absolute;left:0;top:9px;width:10px;height:10px;
-    border-radius:50%;border:2px solid var(--gold);
-  }
-  .guide-box{
+  .ciclo .chip{
     background:var(--night);color:var(--night-text);
-    border:none;text-align:center;padding:34px 26px;
+    font-size:12.5px;font-weight:600;letter-spacing:.05em;
+    padding:9px 16px;border-radius:40px;
   }
-  .guide-box h3{color:var(--gold-soft);}
-  .guide-box .gtitle{
-    font-family:'Playfair Display',serif;font-size:24px;font-weight:600;
+  .ciclo .arrow{color:var(--gold);font-size:16px;font-weight:700;}
+
+  /* ---------- ciencia blocks ---------- */
+  .ciencia{
+    background:var(--card);border:1.5px solid var(--line);
+    border-radius:18px;padding:26px 24px;margin-bottom:22px;
+  }
+  .ciencia .num{
+    font-family:'Playfair Display',serif;font-weight:700;
+    font-size:30px;color:var(--gold);line-height:1;margin-bottom:8px;
+  }
+  .ciencia h3{
+    font-family:'Playfair Display',serif;font-weight:600;
+    font-size:19px;margin-bottom:14px;line-height:1.3;
+  }
+  .ciencia .escena{
+    font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:17.5px;line-height:1.55;color:var(--ink-soft);
+    border-left:2.5px solid var(--gold);padding-left:16px;margin-bottom:16px;
+  }
+  .ciencia p{font-size:14.5px;}
+
+  /* ---------- etapas ---------- */
+  .etapas{list-style:none;margin:24px 0;}
+  .etapas li{
+    display:flex;gap:14px;align-items:baseline;
+    padding:13px 0;border-bottom:1px solid var(--line);
+  }
+  .etapas .ename{
+    font-family:'Playfair Display',serif;font-weight:600;font-size:17px;
+    white-space:nowrap;
+  }
+  .etapas .edesc{font-size:14px;color:var(--ink-soft);}
+
+  /* ---------- oferta ---------- */
+  .oferta{
+    background:var(--card);border:2px solid var(--gold);
+    border-radius:20px;padding:32px 26px;text-align:center;
+  }
+  .oferta h3{
+    font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:18px;
+  }
+  .oferta .stack{text-align:left;margin-bottom:22px;}
+  .oferta .price{
+    font-family:'Playfair Display',serif;font-size:44px;font-weight:700;
+    line-height:1;margin:6px 0 4px;
+  }
+  .oferta .price-note{font-size:13px;color:var(--ink-soft);margin-bottom:6px;}
+
+  /* ---------- testimonios ---------- */
+  .quotes{list-style:none;}
+  .quotes li{
+    font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:19px;line-height:1.5;text-align:center;
+    padding:14px 10px;color:var(--ink);
+  }
+  .quotes-who{
+    text-align:center;font-size:11.5px;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--gold);font-weight:600;margin-top:14px;
+  }
+
+  /* ---------- garantia ---------- */
+  .garantia{
+    background:var(--night);color:var(--night-text);
+    border-radius:20px;padding:30px 26px;text-align:center;
+  }
+  .garantia h3{
+    font-family:'Playfair Display',serif;font-weight:600;font-size:21px;
     margin-bottom:14px;color:#fff;
   }
-  .guide-box p{color:#D9CEC2;font-size:14px;}
-  .offer{
-    border:2px solid var(--gold);background:#FBF5EA;text-align:center;
+  .garantia p{color:#E0D6C8;font-size:14.5px;}
+
+  /* ---------- faq ---------- */
+  details{
+    background:var(--card);border:1.5px solid var(--line);
+    border-radius:14px;margin-bottom:12px;padding:0 20px;
   }
-  .offer .price{
-    font-family:'Playfair Display',serif;font-size:30px;font-weight:700;margin:8px 0 2px;
+  summary{
+    cursor:pointer;font-weight:600;font-size:14.5px;
+    padding:17px 0;list-style:none;position:relative;padding-right:30px;
   }
-  .offer .strike{text-decoration:line-through;color:var(--ink-soft);font-size:17px;font-weight:500;margin-right:10px;}
-  .offer .small{font-size:12px;color:var(--ink-soft);margin-top:10px;}
-  .share{
-    text-align:center;padding:30px 24px;
+  summary::-webkit-details-marker{display:none;}
+  summary::after{
+    content:"+";position:absolute;right:2px;top:14px;
+    color:var(--gold);font-size:21px;font-weight:500;
   }
-  .share p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:19px;color:var(--ink);}
-  .wa{
-    display:inline-flex;align-items:center;gap:10px;
-    margin-top:18px;background:#1FA855;color:#fff;
-    padding:15px 28px;border-radius:60px;text-decoration:none;
-    font-weight:600;font-size:14px;letter-spacing:.03em;
-    transition:transform .2s ease;
-  }
-  .wa:hover{transform:translateY(-2px);}
-  .feedback{text-align:center;margin-top:6px;}
-  .feedback p{font-size:13.5px;color:var(--ink-soft);}
-  .feedback a{color:var(--gold);font-weight:600;text-decoration:none;}
+  details[open] summary::after{content:"–";}
+  details p{font-size:14px;color:var(--ink-soft);padding-bottom:17px;}
+
+  /* ---------- pd ---------- */
+  .pd{font-size:15px;}
+  .pd strong{color:var(--gold);}
+
   footer{
-    margin-top:46px;padding-top:24px;border-top:1px solid var(--line);
-    text-align:center;font-size:11.5px;color:var(--ink-soft);line-height:1.7;
+    border-top:1px solid var(--line);
+    text-align:center;font-size:11.5px;color:var(--ink-soft);
+    padding:34px 22px 44px;line-height:1.7;
   }
-  .divider{
-    text-align:center;margin:34px 0 30px;color:var(--gold);
-    font-family:'Cormorant Garamond',serif;font-style:italic;font-size:20px;
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .btn:hover{transform:none;}
   }
 </style>
 </head>
 <body>
 
-<div id="progressBar"></div>
+<h1>¿Por qué no puedes soltarlo, aunque sabes que te hace daño? Diagnóstico de 3 minutos</h1>
 
-<!-- ================= INTRO ================= -->
-<div class="screen active" id="screen-intro">
-  <div class="wrap intro">
-    <div class="brand">Transformación y Luz</div>
-    <h1>¿Por qué no puedes soltarlo, aunque sabes que te hace daño?</h1>
-    <p>12 preguntas. 3 minutos. Al final vas a saber en cuál de las 5 etapas del ciclo está atrapado tu patrón — y qué lo rompe en tu caso.</p>
-    <p class="calm">Respira. Responde con honestidad.<br>Nadie más va a ver tus respuestas.</p>
-    <button class="btn" onclick="startQuiz()">Comenzar mi diagnóstico</button>
-    <div class="meta">Basado en psicología del apego y del comportamiento</div>
+<div class="topbar">Transformación y Luz</div>
+
+<!-- ============ HERO ============ -->
+<div class="hero">
+  <div class="wrap">
+    <img src="portada.jpg" alt="Mujer de pie dentro de un ciclo de flechas doradas — ¿Por qué no puedo soltarlo?">
+    <p class="open-loop">No es debilidad, no es que ames demasiado y no necesitas su explicación para sanar. Estás atrapada en un ciclo que se repite solo — y mientras no sepas en qué punto estás, cada intento de soltarlo te va a regresar al inicio.</p>
+    <div class="cta-block">
+      <a class="btn gold" href="https://pay.hotmart.com/L106287547V">Quiero saber qué me tiene atrapada →</a>
+      <div class="cta-note">3 minutos · 12 preguntas · resultado inmediato</div>
+    </div>
   </div>
 </div>
 
-<!-- ================= QUIZ ================= -->
-<div class="screen" id="screen-quiz">
-  <div class="wrap quiz">
-    <div class="qcount" id="qcount"></div>
-    <div class="qtext" id="qtext"></div>
-    <div id="opts"></div>
-  </div>
+<!-- ============ MIRROR 1 ============ -->
+<div class="mirror-band">
+  <div class="phrase">"No estás loca por necesitar claridad. Lo que te rompe no es la distancia: es que te dejen adivinando si todavía importas."</div>
 </div>
 
-<!-- ================= MIRROR INTERLUDE ================= -->
-<div class="screen" id="screen-mirror">
-  <div class="mirror">
-    <div class="phrase" id="mirrorPhrase"></div>
-    <div class="sub" id="mirrorSub"></div>
-    <button class="btn" onclick="resumeQuiz()">Continuar</button>
+<!-- ============ PARA QUIÉN ============ -->
+<section>
+  <div class="wrap">
+    <h2>Esto es para ti si…</h2>
+    <ul class="tick-list">
+      <li>Revisas el celular más veces de las que quieres admitir, esperando un mensaje que no llega.</li>
+      <li>Él desaparece días — a veces semanas — y cuando vuelve, tú vuelves también. Y te odias un poquito por eso.</li>
+      <li>Ya lo bloqueaste, lo borraste, te prometiste no escribirle… y recaíste. Más de una vez.</li>
+      <li>Tus amigas ya te dijeron que lo sueltes. Tú también te lo dijiste. Lo entiendes perfectamente. <em>Pero tu corazón no.</em></li>
+      <li>Sientes que te estás perdiendo a ti misma por sostener algo que él ni siquiera está sosteniendo contigo.</li>
+    </ul>
   </div>
+</section>
+
+<!-- ============ PROBLEMA ============ -->
+<section style="padding-top:6px;">
+  <div class="wrap">
+    <h2>No es falta de voluntad.<br>Y no es que ames demasiado.</h2>
+    <p>Llevas tiempo creyendo que si fueras "más fuerte" ya lo habrías soltado. O que si él te diera una explicación, un cierre, una última conversación… por fin podrías pasar la página.</p>
+    <p><strong>Pero mira lo que pasa cada vez:</strong></p>
+    <div class="ciclo">
+      <span class="chip">Su silencio</span><span class="arrow">→</span>
+      <span class="chip">Tu ansiedad</span><span class="arrow">→</span>
+      <span class="chip">Lo buscas</span><span class="arrow">→</span>
+      <span class="chip">Migajas</span><span class="arrow">→</span>
+      <span class="chip">Culpa</span><span class="arrow">→</span>
+      <span class="chip">Recaída</span><span class="arrow">↺</span>
+    </div>
+    <p>¿Te suena? Eso no es debilidad. <strong>Es un ciclo — y los ciclos no se rompen con fuerza de voluntad.</strong></p>
+    <p>Por eso todo lo que has intentado no ha funcionado: bloquear su número ataca UNA pieza del ciclo, pero el ciclo te atrapa en la siguiente. Es como tapar una gotera mientras la tubería sigue rota.</p>
+    <p>Y hay algo más que nadie te ha dicho: <strong>no se rompe igual en todas las etapas.</strong> Lo que necesita una mujer atrapada en la espera no es lo mismo que necesita una atrapada en la culpa o en la recaída. Si no sabes en cuál estás, estás luchando a ciegas.</p>
+  </div>
+</section>
+
+<!-- ============ MIRROR 2 ============ -->
+<div class="mirror-band">
+  <div class="phrase">"Redactas el mensaje. Lo borras. Lo vuelves a escribir. Te prometes no mandarlo. Lo mandas."</div>
+  <div class="who">¿Cuántas veces ha pasado?</div>
 </div>
 
-<!-- ================= CALCULATING ================= -->
-<div class="screen" id="screen-calc">
-  <div class="calc">
-    <div class="pulse"></div>
-    <div class="dots" id="calcText">Leyendo tu patrón…</div>
+<!-- ============ CIENCIA ============ -->
+<section>
+  <div class="wrap">
+    <h2>Lo que nadie te ha explicado sobre por qué no puedes soltarlo</h2>
+    <p class="soft" style="margin-bottom:28px;">Lo que estás viviendo tiene nombre en psicología. Y cuando lo entiendas, vas a dejar de culparte.</p>
+
+    <div class="ciencia">
+      <div class="num">1</div>
+      <h3>Su intermitencia te engancha más que su amor.</h3>
+      <div class="escena">Lleva 4 días sin escribirte. Tú ya decidiste que se acabó, hasta se lo dijiste a tu amiga. Y de la nada llega un "hola, ¿cómo estás?"… y todo se derrumba en un segundo.</div>
+      <p>Eso tiene nombre: <em>refuerzo intermitente</em>. Cuando el cariño llega de forma impredecible, el cerebro no se desengancha… se engancha MÁS. Es el mecanismo de las máquinas de casino: nadie se queda pegada a una máquina que nunca paga, ni a una que paga siempre — la gente queda atrapada en la que paga <em>de vez en cuando</em>. No estás enganchada a él <em>a pesar</em> de que aparece y desaparece. Estás enganchada <em>porque</em> aparece y desaparece.</p>
+    </div>
+
+    <div class="ciencia">
+      <div class="num">2</div>
+      <h3>Tu cerebro confunde ansiedad con amor.</h3>
+      <div class="escena">Son las 11 de la noche. Abres el chat. Está "en línea". No te escribe. Lo cierras. Lo vuelves a abrir a los 5 minutos. Revisas si vio tu historia. La vio. El corazón se te aprieta… y no puedes parar.</div>
+      <p>La dopamina — la química de la adicción — no se dispara cuando recibes el mensaje. Se dispara en la <em>espera incierta</em> del mensaje. Esa mezcla de nervios, esperanza y nudo en el estómago no es amor: es el circuito pidiendo su dosis. Por eso un hombre estable y presente a veces te parece "aburrido" — tu sistema aprendió a confundir paz con falta de emoción.</p>
+    </div>
+
+    <div class="ciencia">
+      <div class="num">3</div>
+      <h3>Buscarlo no es debilidad: es tu sistema de apego protestando.</h3>
+      <div class="escena">Redactas el mensaje. Lo borras. Lo vuelves a escribir. Te prometes no mandarlo. Lo mandas. Y a los 10 minutos ya te estás odiando por haberlo mandado.</div>
+      <p>La psicología del apego lo describe desde hace décadas: cuando alguien importante se aleja sin explicación, tu sistema de apego se activa en <em>modo protesta</em> — escribir, llamar, revisar señales. Es un mecanismo de supervivencia emocional, no falta de dignidad. <strong>Por eso la fuerza de voluntad no te ha funcionado: no estás luchando contra un sentimiento. Estás luchando contra un circuito.</strong></p>
+    </div>
+
+    <p style="text-align:center;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:20px;margin-top:8px;">Y los circuitos no se rompen con fuerza.<br>Se rompen sabiendo exactamente dónde cortarlos.</p>
   </div>
+</section>
+
+<!-- ============ EL DIAGNÓSTICO ============ -->
+<section style="background:var(--sand);">
+  <div class="wrap">
+    <h2>Por eso creé el Diagnóstico:<br>¿Por qué no puedo soltarlo?</h2>
+    <p>Un test de <strong>12 preguntas (3 minutos)</strong> que identifica en cuál de las 5 etapas del ciclo está atrapado tu patrón:</p>
+    <ul class="etapas">
+      <li><span class="ename">La Espera</span><span class="edesc">él en silencio, tú pendiente del celular.</span></li>
+      <li><span class="ename">La Alerta</span><span class="edesc">releer conversaciones, revisar su "en línea", buscar señales.</span></li>
+      <li><span class="ename">La Búsqueda</span><span class="edesc">escribirle, pedir claridad, mendigar lo que debería darte sin pedirlo.</span></li>
+      <li><span class="ename">La Culpa</span><span class="edesc">la vergüenza después, el "otra vez lo hice", tratarte como enemiga.</span></li>
+      <li><span class="ename">La Recaída</span><span class="edesc">él reaparece (o tú vuelves) y el ciclo arranca de nuevo.</span></li>
+    </ul>
+    <p>Cada etapa se rompe distinto. Lo que necesita una mujer atrapada en La Espera no es lo que necesita una atrapada en La Culpa. <strong>Por eso tu resultado no es una etiqueta — es un mapa.</strong></p>
+  </div>
+</section>
+
+<!-- ============ OFERTA ============ -->
+<section>
+  <div class="wrap">
+    <div class="oferta">
+      <h3>Esto es lo que recibes hoy</h3>
+      <div class="stack">
+        <ul class="check-list">
+          <li><strong>El Diagnóstico completo</strong> — 12 preguntas, 3 minutos, y la respuesta que llevas meses buscando: la etapa exacta donde tu patrón te atrapa.</li>
+          <li><strong>Tu resultado explicado a profundidad</strong> — qué pasa en tu mente y en tu cuerpo en esa etapa, y por qué justo ahí recaes. Sin etiquetas, sin juzgarte.</li>
+          <li><strong>Tu Guía de Ruptura del Ciclo (PDF)</strong> — los 3 movimientos concretos para cortar el circuito en TU etapa específica. No consejos genéricos de "quiérete más".</li>
+          <li><strong>BONUS: "Qué hacer cuando él reaparezca"</strong> — porque va a reaparecer. Esta guía te prepara para ese momento ANTES de que llegue.</li>
+        </ul>
+      </div>
+      <div class="price-note">Todo por</div>
+      <div class="price">$7 USD</div>
+      <div class="price-note">Menos de lo que cuesta el domicilio que pides las noches que él no escribe.</div>
+      <div class="cta-block" style="margin-top:22px;">
+        <a class="btn gold" href="https://pay.hotmart.com/L106287547V">Quiero mi diagnóstico ahora →</a>
+        <div class="cta-note">Acceso inmediato · Pago seguro por Hotmart</div>
+      </div>
+    </div>
+    <p class="soft" style="margin-top:26px;text-align:center;font-size:14px;">¿Cuántas horas se te fueron esta semana en revisar su perfil y darle vueltas a qué quiso decir con ese "ok"? El precio real no son los $7. El precio real es otro mes atrapada en el mismo ciclo — esperando que él te dé una claridad que no va a llegar. <strong>La claridad te la vas a dar tú. En 3 minutos. Hoy.</strong></p>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIOS ============ -->
+<div class="mirror-band">
+  <div class="phrase" style="font-size:clamp(18px,4.5vw,22px);">
+    "Me dejaba semanas en silencio y yo ahí, esperando."<br><br>
+    "Me cansé de mendigar amor."<br><br>
+    "Lo entiendo perfectamente… pero mi corazón no."<br><br>
+    "Me perdí a mí misma por sostener esa relación."
+  </div>
+  <div class="who">Mujeres reales de la comunidad Transformación y Luz</div>
 </div>
 
-<!-- ================= RESULT MIRROR ================= -->
-<div class="screen" id="screen-result-mirror">
-  <div class="mirror">
-    <div class="phrase" id="resultMirror"></div>
-    <div class="sub">¿Te suena?</div>
-    <button class="btn" onclick="showResult()">Ver mi etapa</button>
+<!-- ============ GARANTÍA ============ -->
+<section>
+  <div class="wrap">
+    <div class="garantia">
+      <h3>Garantía "Esto me describe"</h3>
+      <p>Haz el test. Lee tu resultado completo. Si al terminar no piensas <em>"esto me describe exacto"</em>, escríbeme dentro de los próximos 7 días y te devuelvo tus $7. Sin preguntas, sin formularios eternos, sin hacerte rogar — de eso ya tuviste suficiente.</p>
+      <p style="margin-top:14px;"><strong style="color:#fff;">Todo el riesgo lo asumo yo. Tú solo asumes 3 minutos.</strong></p>
+    </div>
   </div>
-</div>
+</section>
 
-<!-- ================= RESULT ================= -->
-<div class="screen" id="screen-result">
-  <div class="wrap result">
-    <div class="stage-eyebrow">Tu etapa dominante es</div>
-    <div class="stage-name" id="stageName"></div>
-    <div class="stage-tag" id="stageTag"></div>
-
-    <div class="block">
-      <h3>Qué está pasando en ti</h3>
-      <div id="stageBody"></div>
-    </div>
-
-    <div class="block">
-      <h3>Por qué justo aquí recaes</h3>
-      <p id="stageWhy"></p>
-    </div>
-
-    <div class="block guide-box">
-      <h3>Lo que rompe el ciclo en tu etapa</h3>
-      <div class="gtitle" id="guideTitle"></div>
-      <p>Tu guía personalizada ya está lista.
-
-Descárgala ahora y además recibe un bonus especial:
-<strong>"Qué hacer cuando él reaparezca"</strong>,
-una herramienta diseñada para ayudarte a no recaer cuando vuelva a buscarte— </p>
-      <a class="btn gold" id="guideLink" href="REEMPLAZAR_LINK_GUIA" target="_blank" rel="noopener">Descargar mi guía</a>
-      <br><br>
-
-<a class="btn" href="Bonus_Cuando_El_Reaparezca.pdf" target="_blank">
-🎁 Descargar Bonus: Qué hacer cuando él reaparezca
-</a>
-    </div>
-
-    <div class="divider">✦</div>
-
-    <div class="block offer">
-      <h3>Tu siguiente paso — solo en esta pantalla</h3>
-      <p style="font-family:'Playfair Display',serif;font-size:21px;font-weight:600;">Mujer Magnética</p>
-      <p class="soft" style="font-size:14px;">El diagnóstico te mostró dónde estás atrapada. Mujer Magnética es el camino completo de regreso a ti: sanar la herida de sentirte insuficiente, dejar de aceptar migajas emocionales y convertirte en la mujer que se elige sin culpa. Incluye el Reset Vibracional de 7 días.</p>
-      <p class="price"><span class="strike">$17</span>$8.50 USD</p>
-      <a class="btn" href="https://pay.hotmart.com/V101273452S?off=c9cgtf68" target="_blank" rel="noopener">Quiero volver a mí — 50% OFF</a>
-      <p class="small">🎁 Por completar el diagnóstico, has desbloqueado acceso preferencial a Mujer Magnética con 50% de descuento. Si estás lista para dejar de girar alrededor de esa historia y volver a elegirte a ti, este es tu siguiente paso.</p>
-    </div>
-
-    <div class="block share">
-      <p>"Mándaselo a esa amiga que está pasando por esto.<br>Ella también merece entender lo que le pasa."</p>
-      <a class="wa" id="waShare" href="#" target="_blank" rel="noopener">Compartir con una amiga</a>
-    </div>
-
-    <div class="feedback">
-      <p>¿Tu resultado te describió? <a href="https://www.tiktok.com/@transformacionluz" target="_blank" rel="noopener">Cuéntamelo en una frase</a> — leo cada mensaje.</p>
-    </div>
-
-    <footer>
-      Este diagnóstico tiene fines educativos y de crecimiento personal. No constituye una evaluación psicológica y no reemplaza acompañamiento médico, psicológico o terapéutico profesional.<br><br>© Transformación y Luz — Reina Martínez
-    </footer>
+<!-- ============ FAQ ============ -->
+<section style="padding-top:8px;">
+  <div class="wrap">
+    <h2>Preguntas frecuentes</h2>
+    <details>
+      <summary>¿Cuánto tiempo me toma?</summary>
+      <p>3 minutos el test. Tu resultado y tu Guía de Ruptura los recibes de inmediato.</p>
+    </details>
+    <details>
+      <summary>¿Y si siento que estoy en varias etapas a la vez?</summary>
+      <p>Es normal — el ciclo es uno solo y todas las etapas se tocan. El Diagnóstico identifica tu etapa DOMINANTE: aquella donde tu patrón se atora con más fuerza y donde cortar el circuito tiene más efecto para ti.</p>
+    </details>
+    <details>
+      <summary>¿Esto es terapia?</summary>
+      <p>No. Es una herramienta de claridad y autoconocimiento basada en psicología del apego y del comportamiento. No reemplaza acompañamiento psicológico profesional — y si estás pasando por un momento muy difícil, buscar apoyo profesional es un acto de amor propio, no de debilidad.</p>
+    </details>
+    <details>
+      <summary>¿Sirve si ya terminamos hace meses pero sigo pensándolo?</summary>
+      <p>Especialmente en ese caso. El ciclo no necesita que estén juntos para seguir girando — gira en tu cabeza cada vez que revisas su perfil o relees conversaciones.</p>
+    </details>
+    <details>
+      <summary>¿Cómo recibo todo?</summary>
+      <p>Compras por Hotmart de forma segura y de inmediato recibes tu acceso al test. Al terminarlo, descargas tu Guía de Ruptura + el bonus en PDF.</p>
+    </details>
   </div>
-</div>
+</section>
 
-<script>
-/* =====================================================
-   LÓGICA DEL DIAGNÓSTICO
-   Etapas: espera | alerta | busqueda | culpa | recaida
-   ===================================================== */
+<!-- ============ P.D. ============ -->
+<section style="background:var(--sand);">
+  <div class="wrap">
+    <p class="pd"><strong>P.D.</strong> Si llegaste hasta aquí abajo, déjame decirte algo: llevas semanas — quizás meses — buscando la respuesta en él. En su silencio, en sus señales, en lo que quiso decir con ese último mensaje. Y la respuesta nunca estuvo ahí. Está en tu patrón. Son $7 y 3 minutos para verlo por fin con claridad.</p>
+    <div class="cta-block">
+      <a class="btn" href="https://pay.hotmart.com/L106287547V">Hacer mi diagnóstico ahora →</a>
+    </div>
+    <p class="pd" style="margin-top:30px;text-align:center;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:19px;">No estás loca por necesitar claridad.<br>Lo que te rompe no es la distancia: es que te dejen adivinando si todavía importas.<br><strong style="color:var(--gold);">Hoy dejas de adivinar.</strong></p>
+  </div>
+</section>
 
-const QUESTIONS = [
-  {
-    t:"Son las 11 de la noche y él no te ha escrito. ¿Qué escena se parece más a ti?",
-    o:[
-      {x:"Dejo el celular cerca \u201cpor si acaso\u201d y lo reviso cada rato, pero no le escribo.", s:"espera"},
-      {x:"Entro a ver si está en línea, reviso sus historias, releo nuestro último chat.", s:"alerta"},
-      {x:"Termino mandándole algo: un \u201chola\u201d, un meme, cualquier excusa.", s:"busqueda"},
-      {x:"Ya le escribí antes… y ahora me siento mal por haberlo hecho.", s:"culpa"}
-    ]
-  },
-  {
-    t:"Cuando ves que está \u201cen línea\u201d… y no te escribe:",
-    o:[
-      {x:"Pienso \u201cya me escribirá\u201d y me quedo esperando con el estómago apretado.", s:"espera"},
-      {x:"Empiezo a analizar: ¿con quién estará hablando? ¿Por qué a mí no me escribe?", s:"alerta"},
-      {x:"Siento el impulso casi físico de escribirle yo primero.", s:"busqueda"},
-      {x:"Me digo \u201cqué patética por estar pendiente de esto\u201d… y sigo pendiente.", s:"culpa"}
-    ]
-  },
-  {
-    t:"¿Con qué frecuencia relees conversaciones viejas buscando \u201cseñales\u201d?",
-    o:[
-      {x:"Las releo sobre todo cuando volvemos a hablar, buscando razones para creer que esta vez será distinto.", s:"recaida"},
-      {x:"Varias veces a la semana. A veces varias veces al día.", s:"alerta"},
-      {x:"Las releo… y a veces le termino escribiendo por algo que encontré ahí.", s:"busqueda"},
-      {x:"Las releo y termino sintiéndome peor conmigo misma.", s:"culpa"}
-    ]
-  },
-  {
-    t:"Cuando el silencio se vuelve insoportable…",
-    o:[
-      {x:"Aguanto. Espero. Me digo que si le importo, va a volver solo.", s:"espera"},
-      {x:"Reviso todo: su perfil, sus likes, hasta los amigos que tenemos en común.", s:"alerta"},
-      {x:"Le escribo pidiendo claridad: \u201c¿qué somos?\u201d, \u201c¿te pasa algo conmigo?\u201d", s:"busqueda"},
-      {x:"Le escribí, no respondió como esperaba, y me odié por haberme expuesto.", s:"culpa"}
-    ]
-  },
-  {
-    t:"Después de escribirle (o de buscarlo):",
-    o:[
-      {x:"Casi nunca le escribo primero. Yo espero a que él dé el paso.", s:"espera"},
-      {x:"Me quedo pegada al celular esperando su respuesta, revisando los ✓✓.", s:"alerta"},
-      {x:"Si no responde, insisto: otro mensaje, una historia para que la vea…", s:"busqueda"},
-      {x:"Me prometo que fue la última vez. Otra vez.", s:"recaida"}
-    ]
-  },
-  {
-    t:"Cuando él reaparece con un \u201chola, ¿cómo estás?\u201d:",
-    o:[
-      {x:"Respondo rápido, con ilusión: \u201csabía que iba a volver\u201d. Y todo arranca de nuevo.", s:"recaida", w:2},
-      {x:"No respondo de una… pero releo su mensaje mil veces analizando qué quiso decir.", s:"alerta"},
-      {x:"Le reclamo el silencio, le pido explicaciones… y terminamos hablando igual que siempre.", s:"busqueda"},
-      {x:"Respondo… y después me siento débil por haberlo hecho.", s:"culpa"}
-    ]
-  },
-  {
-    t:"¿Qué frase se parece más a lo que te dices a ti misma?",
-    o:[
-      {x:"\u201cSi le importara me escribiría… voy a esperar un poco más.\u201d", s:"espera"},
-      {x:"\u201cEsta vez sí es la última… aunque ya me lo he prometido antes.\u201d", s:"recaida"},
-      {x:"\u201cTal vez si le explico mejor lo que siento, va a cambiar.\u201d", s:"busqueda"},
-      {x:"\u201cQué vergüenza… ya estoy otra vez en lo mismo.\u201d", s:"culpa"}
-    ]
-  },
-  {
-    t:"Tus amigas te dicen que lo sueltes. Tú:",
-    o:[
-      {x:"Les digo que ya lo solté… pero por dentro sigo esperando que escriba.", s:"espera"},
-      {x:"Les digo que sí… y luego les pregunto: \u201c¿pero por qué creen que vio mi historia?\u201d", s:"alerta"},
-      {x:"Las escucho, les doy la razón… e igual le termino escribiendo a él.", s:"busqueda"},
-      {x:"Ya ni les cuento. Me da pena admitir que sigo en lo mismo.", s:"culpa"}
-    ]
-  },
-  {
-    t:"¿Cuánto espacio ocupa él en tu día?",
-    o:[
-      {x:"Está de fondo todo el día: cada notificación me hace pensar que es él.", s:"espera"},
-      {x:"Va por rachas: semanas sin saber de él… y de repente otra vez hablamos todos los días.", s:"recaida"},
-      {x:"Busco excusas para tener contacto: una duda, una canción, un recuerdo.", s:"busqueda"},
-      {x:"Pienso en él… y después me castigo por seguir pensándolo.", s:"culpa"}
-    ]
-  },
-  {
-    t:"La última vez que intentaste alejarte:",
-    o:[
-      {x:"No le escribí… pero tampoco dejé de esperar que él lo hiciera.", s:"espera"},
-      {x:"Lo dejé de seguir… y terminé revisando su perfil a escondidas.", s:"alerta"},
-      {x:"Aguanté unos días… y le escribí \u201ccomo amigos\u201d.", s:"busqueda"},
-      {x:"Recaí. Y al volver a caer me traté tan mal que la culpa dolió más que su silencio.", s:"recaida", w:2}
-    ]
-  },
-  {
-    t:"¿Qué es lo que más te duele de todo esto?",
-    o:[
-      {x:"La espera: vivir pendiente de algo que no llega.", s:"espera"},
-      {x:"No saber: las señales confusas, el limbo, tener que adivinar.", s:"alerta"},
-      {x:"Sentir que mendigo algo que debería darme sin que yo lo pida.", s:"busqueda"},
-      {x:"En quién me he convertido: ya no me reconozco.", s:"culpa"}
-    ]
-  },
-  {
-    t:"Si fueras 100% honesta contigo… ¿qué estás esperando?",
-    o:[
-      {x:"Que un día escriba y por fin todo se aclare.", s:"espera"},
-      {x:"Una señal definitiva que me diga si le importo o no.", s:"alerta"},
-      {x:"Que cuando vuelva — porque sé que va a volver — esta vez sí sea diferente.", s:"recaida"},
-      {x:"Dejar de sentirme así conmigo misma.", s:"culpa"}
-    ]
-  }
-];
+<footer>
+  Este producto tiene fines educativos y de crecimiento personal. No constituye una evaluación psicológica y no reemplaza acompañamiento médico, psicológico o terapéutico profesional.<br><br>
+  © Transformación y Luz — Reina Martínez · @transformacionluz
+</footer>
 
-const INTERLUDES = {
-  4:{
-    phrase:"Respira. No estás sola en esto. Y no estás loca: lo que sientes tiene explicación.",
-    sub:"Vas muy bien — sigamos"
-  },
-  8:{
-    phrase:"8 de cada 10 mujeres que hacen este diagnóstico han intentado soltarlo más de tres veces. Esto nunca fue falta de fuerza.",
-    sub:"Ya casi terminamos"
-  }
-};
-
-const STAGES = {
-  espera:{
-    name:"La Espera",
-    tag:"Él en silencio. Tú, en pausa.",
-    mirror:"Te has vuelto experta en esperar. En dejar el celular boca arriba. En no escribirle primero… pero tampoco soltar.",
-    body:`<p>Tu patrón se atora en la antesala del ciclo: no lo persigues, no le ruegas — pero tu vida quedó <strong>en pausa</strong>, esperando que él decida. Cada notificación te sobresalta. Cada día que pasa sin mensaje, en vez de soltarte… recarga la esperanza de que \u201cquizás mañana\u201d.</p><p class="soft">En tu cuerpo se siente así: estómago apretado, sueño ligero, ese brinco en el pecho cuando vibra el celular. Tu sistema nervioso está en sala de espera permanente.</p>`,
-    why:"Por el refuerzo intermitente: como alguna vez volvió, tu cerebro aprendió que esperar \u201cfunciona\u201d. Una miguita — un like, un visto, un \u201chola\u201d cada tantas semanas — basta para recargar meses de espera. No estás esperando a un hombre: estás esperando la dosis. Y mientras tu vida esté en pausa, el ciclo no necesita ni que él aparezca para seguir girando.",
-    guide:"Guía de Ruptura — Etapa La Espera"
-  },
-  alerta:{
-    name:"La Alerta",
-    tag:"Sabes todo de él… menos cómo parar de mirar.",
-    mirror:"Sabes a qué hora se conecta. Qué historias ve. Cuánto tarda en responder. Sabes todo de él… menos por qué no puedes dejar de mirar.",
-    body:`<p>Tu patrón se atora en la <strong>hipervigilancia</strong>: revisar su \u201cen línea\u201d, sus historias, sus likes, releer conversaciones buscando señales. Tu mente te dice que estás \u201crecogiendo información\u201d… pero en realidad está buscando una sola cosa: una señal que calme la ansiedad de no saber.</p><p class="soft">El problema: cada revisión te da un micro-alivio de 30 segundos… y te deja más enganchada que antes. Es un círculo que se alimenta solo.</p>`,
-    why:"Porque tu cerebro confunde información con control. La dopamina no se dispara cuando encuentras la señal — se dispara en la búsqueda. Por eso revisar duele y al mismo tiempo no puedes parar: tu sistema quedó atrapado en el circuito de anticipación. Vigilarlo te da la ilusión de tener el control… mientras él, sin hacer nada, ocupa todas las horas de tu día.",
-    guide:"Guía de Ruptura — Etapa La Alerta"
-  },
-  busqueda:{
-    name:"La Búsqueda",
-    tag:"Pidiendo claridad que nunca llega.",
-    mirror:"Redactas el mensaje. Lo borras. Lo vuelves a escribir. Te prometes no mandarlo. Lo mandas. Y a los diez minutos ya te estás arrepintiendo.",
-    body:`<p>Tu patrón se atora en la <strong>búsqueda activa</strong>: escribirle, pedirle claridad, explicarle lo que sientes \u201ca ver si entiende\u201d, mandar la indirecta, subir la historia para que la vea. Una parte de ti cree que si encuentras las palabras correctas, él por fin va a darte el lugar que mereces.</p><p class="soft">Y cada vez que recibes migajas — o silencio — el mensaje que tu autoestima registra es: \u201ctengo que esforzarme más para merecer claridad\u201d. Eso es lo que más te está desgastando.</p>`,
-    why:"Porque buscarlo no es debilidad: es tu sistema de apego en modo protesta. Cuando alguien importante se aleja sin explicación, tu mente lo lee como amenaza y activa el mecanismo más antiguo que tienes: buscar, llamar, pedir respuesta. Es biología de supervivencia, no falta de dignidad. Pero hay una trampa: cada búsqueda le entrega a él el poder de calmarte… y te aleja un paso más de poder calmarte tú.",
-    guide:"Guía de Ruptura — Etapa La Búsqueda"
-  },
-  culpa:{
-    name:"La Culpa",
-    tag:"Lo que él hace duele. Cómo te tratas tú después, duele más.",
-    mirror:"Lo que más te duele ya no es lo que él hace. Es cómo te hablas tú después: \u201cotra vez caíste\u201d, \u201cqué vergüenza\u201d, \u201cya no me reconozco\u201d.",
-    body:`<p>Tu patrón se atora en el <strong>autocastigo</strong>: después de esperar, revisar o escribirle, llega la voz que te juzga. Te tratas como enemiga por sentir lo que sientes. Y hasta dejaste de contarle a tus amigas — porque la vergüenza de \u201cseguir en lo mismo\u201d pesa demasiado.</p><p class="soft">Aquí está la parte que nadie te ha dicho: la culpa no te está ayudando a salir. Te está hundiendo más adentro.</p>`,
-    why:"Porque la vergüenza debilita exactamente los recursos que necesitas para sostenerte: cuando te castigas, tu sistema emocional queda más frágil, más necesitado de consuelo… y ¿adivina qué consuelo conoce mejor tu cerebro? Él. Por eso después de los peores episodios de culpa vienen las recaídas más fuertes. No es casualidad: es el ciclo alimentándose de tu autocrítica.",
-    guide:"Guía de Ruptura — Etapa La Culpa"
-  },
-  recaida:{
-    name:"La Recaída",
-    tag:"Cada vez que él vuelve… tú también vuelves.",
-    mirror:"Cada vez que él vuelve, tú también vuelves. Y una parte de ti ya está cansada de prometerse que esta sí es la última vez.",
-    body:`<p>Tu patrón se atora en el punto más fuerte del ciclo: <strong>el reencuentro</strong>. Puedes aguantar días, semanas, hasta meses… pero cuando llega su \u201chola, ¿cómo estás?\u201d, todo lo que habías construido se derrumba en un mensaje. Y no es que no hayas avanzado: es que ese momento dispara la dosis química más fuerte de todo el ciclo.</p><p class="soft">El alivio de \u201cvolvió\u201d se siente como amor. Pero fíjate bien: lo que sientes en ese instante no es felicidad… es el fin momentáneo de la ansiedad.</p>`,
-    why:"Porque el refuerzo intermitente está en su punto máximo: tras la ausencia, el regreso libera una descarga de alivio tan intensa que tu cerebro la registra como prueba de amor. No recaes por amor — recaes por alivio. Y como nadie te preparó para ese momento exacto, te agarra siempre con la guardia abajo. La buena noticia: ese momento se puede anticipar. Y anticipado, pierde casi todo su poder.",
-    guide:"Guía de Ruptura — Etapa La Recaída"
-  }
-};
-
-/* ---------- state ---------- */
-let current = 0;
-const scores = {espera:0, alerta:0, busqueda:0, culpa:0, recaida:0};
-let finalStage = null;
-
-/* ---------- helpers ---------- */
-function show(id){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  const el = document.getElementById(id);
-  el.classList.remove('active');
-  void el.offsetWidth; /* restart animation */
-  el.classList.add('active');
-  window.scrollTo({top:0, behavior:'auto'});
-  const dark = (id==='screen-mirror'||id==='screen-calc'||id==='screen-result-mirror');
-  document.body.classList.toggle('night-mode', dark);
-}
-
-function setProgress(){
-  const pct = Math.round((current / QUESTIONS.length) * 100);
-  document.getElementById('progressBar').style.width = pct + '%';
-}
-
-/* ---------- flow ---------- */
-function startQuiz(){
-  current = 0;
-  renderQuestion();
-  show('screen-quiz');
-}
-
-function renderQuestion(){
-  const q = QUESTIONS[current];
-  document.getElementById('qcount').textContent = 'Pregunta ' + (current+1) + ' de ' + QUESTIONS.length;
-  document.getElementById('qtext').textContent = q.t;
-  const box = document.getElementById('opts');
-  box.innerHTML = '';
-  q.o.forEach(opt=>{
-    const b = document.createElement('button');
-    b.className = 'opt';
-    b.type = 'button';
-    b.textContent = opt.x;
-    b.onclick = ()=>answer(opt);
-    box.appendChild(b);
-  });
-  setProgress();
-}
-
-function answer(opt){
-  scores[opt.s] += (opt.w || 1);
-  current++;
-  setProgress();
-  if(INTERLUDES[current] && current < QUESTIONS.length){
-    const it = INTERLUDES[current];
-    document.getElementById('mirrorPhrase').textContent = it.phrase;
-    document.getElementById('mirrorSub').textContent = it.sub;
-    show('screen-mirror');
-  } else if(current < QUESTIONS.length){
-    renderQuestion();
-    show('screen-quiz');
-  } else {
-    finishQuiz();
-  }
-}
-
-function resumeQuiz(){
-  renderQuestion();
-  show('screen-quiz');
-}
-
-function finishQuiz(){
-  document.getElementById('progressBar').style.width = '100%';
-  show('screen-calc');
-  const msgs = ['Leyendo tu patrón…','Comparando tus respuestas con las 5 etapas…','Identificando tu etapa dominante…'];
-  let i = 0;
-  const tEl = document.getElementById('calcText');
-  tEl.textContent = msgs[0];
-  const iv = setInterval(()=>{
-    i++;
-    if(i < msgs.length){ tEl.textContent = msgs[i]; }
-  }, 1200);
-  setTimeout(()=>{
-    clearInterval(iv);
-    computeResult();
-  }, 3600);
-}
-
-function computeResult(){
-  /* tie-break: la etapa más profunda del ciclo domina */
-  const depth = ['recaida','culpa','busqueda','alerta','espera'];
-  let best = depth[0];
-  depth.forEach(s=>{
-    if(scores[s] > scores[best]) best = s;
-  });
-  /* depth order already favors deeper stages on ties because we start there
-     and only replace with strictly greater scores */
-  finalStage = best;
-  const st = STAGES[finalStage];
-  document.getElementById('resultMirror').textContent = st.mirror;
-  show('screen-result-mirror');
-}
-
-function showResult(){
-  const st = STAGES[finalStage];
-  document.getElementById('stageName').textContent = st.name;
-  document.getElementById('stageTag').textContent = st.tag;
-  document.getElementById('stageBody').innerHTML = st.body;
-  document.getElementById('stageWhy').textContent = st.why;
-  document.getElementById('guideTitle').textContent = st.guide;
-
-  /* Links por etapa: reemplaza cada URL por el link real de descarga de cada guía */
-  const GUIDE_LINKS = {
-    espera:  'Guia_Ruptura_La_Espera.pdf',
-    alerta:  'Guia_Ruptura_La_Alerta.pdf',
-    busqueda:'Guia_Ruptura_La_Busqueda.pdf',
-    culpa:   'Guia_Ruptura_La_Culpa.pdf',
-    recaida: 'Guia_Ruptura_La_Recaida.pdf'
-  };
-  document.getElementById('guideLink').href = GUIDE_LINKS[finalStage];
-
-  /* Compartir por WhatsApp: reemplaza REEMPLAZAR_LINK_TEST por la URL pública del test */
-  const shareText = encodeURIComponent(
-    'Acabo de hacer este test y me describió exacto 😳 \u201c¿Por qué no puedes soltarlo, aunque sabes que te hace daño?\u201d — creo que te va a servir a ti también: REEMPLAZAR_LINK_TEST'
-  );
-  document.getElementById('waShare').href = 'https://wa.me/?text=' + shareText;
-
-  show('screen-result');
-}
-</script>
 </body>
 </html>
