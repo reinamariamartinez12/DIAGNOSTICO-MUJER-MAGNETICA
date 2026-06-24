@@ -1,6 +1,25 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}
+(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '767542639288249');
+fbq('track', 'PageView');
+</script>
+<noscript>
+  <img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=767542639288249&ev=PageView&noscript=1"/>
+</noscript>
+<!-- End Meta Pixel Code -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>¿Por qué no puedes soltarlo, aunque sabes que te hace daño? — Diagnóstico</title>
@@ -427,5 +446,50 @@
   © Transformación y Luz — Reina Martínez · TikTok @transformacionyluz · Instagram @transformacionluz
 </footer>
 
+<!-- Meta Pixel Events -->
+<script>
+(function () {
+  'use strict';
+
+  // ViewContent: se dispara una vez al cargar la landing
+  if (!sessionStorage.getItem('px_vc')) {
+    fbq('track', 'ViewContent', {
+      content_name: 'El Diagnóstico: ¿Por qué no puedo soltarlo?',
+      content_category: 'landing_principal',
+      currency: 'USD',
+      value: 7.00
+    });
+    sessionStorage.setItem('px_vc', '1');
+  }
+
+  // InitiateCheckout: clic en botones de Hotmart
+  document.querySelectorAll('a[href*="hotmart"]').forEach(function(btn) {
+    btn.addEventListener('click', function () {
+      if (!sessionStorage.getItem('px_ic')) {
+        fbq('track', 'InitiateCheckout', {
+          content_name: 'El Diagnóstico',
+          currency: 'USD',
+          value: 7.00,
+          num_items: 1
+        });
+        sessionStorage.setItem('px_ic', '1');
+      }
+    });
+  });
+
+  // Lead: clic en botón de WhatsApp (si existe)
+  var wa = document.querySelector('a[href*="wa.me"]');
+  if (wa) {
+    wa.addEventListener('click', function () {
+      if (!sessionStorage.getItem('px_lead_wa')) {
+        fbq('track', 'Lead', { content_name: 'WhatsApp CTA' });
+        sessionStorage.setItem('px_lead_wa', '1');
+      }
+    });
+  }
+
+})();
+</script>
+<!-- End Meta Pixel Events -->
 </body>
 </html>
