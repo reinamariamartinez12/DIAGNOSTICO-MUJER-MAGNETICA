@@ -1,2 +1,2 @@
-# DIAGNOSTICO-MUJER-MAGNETICA
-Microactivo interactivo Diagnóstico Mujer Magnética
+# Diagnóstico Mujer Magnética
+Transformación y Luz — @transformacionyluz
