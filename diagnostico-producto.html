@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <!-- Meta Pixel -->
 <script>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -747,9 +748,37 @@ src="https://www.facebook.com/tr?id=767542639288249&ev=PageView&noscript=1"/></n
     .mm-card-body { max-width: 100%; }
   }
 
+/* ---------- GATE DE CLAVE ---------- */
+.gate-overlay{
+  position:fixed; inset:0; background:var(--cream); z-index:2000;
+  display:flex; align-items:center; justify-content:center; padding:24px;
+}
+.gate-box{max-width:340px; width:100%; text-align:center;}
+.gate-box .brand-label{margin-bottom:18px; font-size:12px; letter-spacing:.22em; text-transform:uppercase; color:var(--gold); font-weight:600;}
+.gate-box h2{font-family:'Playfair Display',serif; font-size:24px; margin-bottom:10px; color:var(--ink);}
+.gate-box p{font-size:14px; color:var(--ink-soft); margin-bottom:22px; line-height:1.5;}
+.gate-input{
+  width:100%; padding:13px 16px; border-radius:100px;
+  border:1.5px solid var(--line); font-family:'Montserrat',sans-serif;
+  font-size:15px; text-align:center; margin-bottom:14px; background:var(--card); color:var(--ink);
+}
+.gate-input:focus{outline:none; border-color:var(--gold);}
+.gate-error{color:#B0453A; font-size:13px; margin-bottom:10px; display:none;}
+body.locked > *:not(.gate-overlay){display:none !important;}
 </style>
 </head>
-<body>
+<body class="locked">
+
+<div class="gate-overlay" id="gateOverlay">
+  <div class="gate-box">
+    <div class="brand-label">El Diagnóstico · Transformación y Luz</div>
+    <h2>Tu espacio privado</h2>
+    <p>Escribe la clave que te llegó en tu correo de compra para entrar a tu diagnóstico.</p>
+    <input type="text" class="gate-input" id="gateInput" placeholder="Clave de acceso" autocomplete="off">
+    <p class="gate-error" id="gateError">Esa clave no es correcta. Revisa tu correo de compra e inténtalo de nuevo.</p>
+    <button class="btn gold" onclick="checkGate()" style="width:100%;">Entrar</button>
+  </div>
+</div>
 
 <div id="progressBar"></div>
 
@@ -936,6 +965,12 @@ src="https://www.facebook.com/tr?id=767542639288249&ev=PageView&noscript=1"/></n
       <div class="gtitle" id="guideTitle"></div>
       <p>Tu Guía de Ruptura incluye los 3 movimientos concretos para cortar el circuito justo donde a ti te atrapa — más el bonus <em>"Qué hacer cuando él reaparezca"</em> — todo en un solo PDF.</p>
       <a class="btn gold" id="guideLink" href="#" target="_blank" rel="noopener">Descargar mi guía + bonus</a>
+    </div>
+
+    <div style="text-align:center;margin:18px 0 0;">
+      <button class="btn ghost" id="downloadResultBtn" onclick="downloadResultPDF()" style="font-size:14px;padding:14px 28px;">
+        ↓ Descargar mi resultado en PDF
+      </button>
     </div>
 
     <div class="divider">✦</div>
@@ -1321,6 +1356,92 @@ function showResult(){
   show('screen-result');
 }
 
+/* ============================================================
+   DESCARGA DEL RESULTADO EN PDF
+   Genera un PDF con el resultado personalizado de la usuaria
+   (no es la guía completa — es un resumen de su etapa para
+   que se lo lleve como recuerdo / lo comparta).
+   ============================================================ */
+function downloadResultPDF(){
+  if (typeof window.jspdf === 'undefined'){
+    alert('No se pudo generar el PDF, intenta de nuevo en unos segundos.');
+    return;
+  }
+  var st = STAGES[finalStage];
+  var nombre = (typeof userName !== 'undefined' && userName) ? userName : 'Tu resultado';
+  var jsPDF = window.jspdf.jsPDF;
+  var doc = new jsPDF({ unit: 'pt', format: 'a4' });
+
+  var pageWidth = doc.internal.pageSize.getWidth();
+  var margin = 56;
+  var maxWidth = pageWidth - margin * 2;
+  var y = 80;
+
+  var goldColor = [176, 141, 87];
+  var inkColor = [58, 46, 38];
+  var inkSoftColor = [107, 93, 82];
+
+  doc.setTextColor(goldColor[0], goldColor[1], goldColor[2]);
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(11);
+  doc.text('EL DIAGNÓSTICO · TRANSFORMACIÓN Y LUZ', margin, y);
+  y += 34;
+
+  doc.setTextColor(inkColor[0], inkColor[1], inkColor[2]);
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(13);
+  doc.text(nombre + ', tu etapa dominante es', margin, y);
+  y += 30;
+
+  doc.setFontSize(24);
+  doc.text(st.name, margin, y);
+  y += 26;
+
+  doc.setFont('helvetica', 'italic');
+  doc.setFontSize(13);
+  doc.setTextColor(inkSoftColor[0], inkSoftColor[1], inkSoftColor[2]);
+  doc.text(st.tag, margin, y);
+  y += 40;
+
+  var bodyPlain = st.body.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(12);
+  doc.setTextColor(inkColor[0], inkColor[1], inkColor[2]);
+  doc.text('Qué está pasando en ti', margin, y);
+  y += 18;
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(11);
+  var bodyLines = doc.splitTextToSize(bodyPlain, maxWidth);
+  doc.text(bodyLines, margin, y);
+  y += bodyLines.length * 15 + 26;
+
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(12);
+  doc.text('Por qué justo aquí recaes', margin, y);
+  y += 18;
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(11);
+  var whyLines = doc.splitTextToSize(st.why, maxWidth);
+  doc.text(whyLines, margin, y);
+  y += whyLines.length * 15 + 34;
+
+  doc.setDrawColor(goldColor[0], goldColor[1], goldColor[2]);
+  doc.setLineWidth(0.6);
+  doc.line(margin, y, pageWidth - margin, y);
+  y += 26;
+
+  doc.setFont('helvetica', 'italic');
+  doc.setFontSize(10.5);
+  doc.setTextColor(inkSoftColor[0], inkSoftColor[1], inkSoftColor[2]);
+  doc.text('Este resultado es un punto de partida para tu proceso, no un diagnóstico', margin, y);
+  y += 14;
+  doc.text('psicológico ni médico. transformacionyluz · @transformacionyluz', margin, y);
+
+  var fileName = 'mi-resultado-diagnostico-' + finalStage + '.pdf';
+  doc.save(fileName);
+}
+
 
 /* ============================================================
    ESTRUCTURA PREPARADA PARA ONBOARDING POST-COMPRA
@@ -1396,7 +1517,48 @@ function checkPostPurchase() {
   }
 }
 
-checkPostPurchase();
+/* ============================================================
+   GATE DE CLAVE — protege el acceso al producto
+   La clave se entrega en el correo automático de Hotmart tras
+   la compra. Si llega recién comprado (?purchased=true) se
+   desbloquea automático una vez, sin pedir clave, para no
+   fastidiar al comprador recién llegado.
+   ============================================================ */
+var STORAGE_PREFIX_DX = 'diagnostico_';
+var GATE_PASSWORD_DX = 'DIAGNOSTICO2026';
+
+function checkGate(){
+  var input = document.getElementById('gateInput');
+  var error = document.getElementById('gateError');
+  if (input.value.trim().toUpperCase() === GATE_PASSWORD_DX){
+    sessionStorage.setItem(STORAGE_PREFIX_DX + 'unlocked', 'true');
+    document.getElementById('gateOverlay').style.display = 'none';
+    document.body.classList.remove('locked');
+    error.style.display = 'none';
+    checkPostPurchase();
+  } else {
+    error.style.display = 'block';
+  }
+}
+var gateInputEl = document.getElementById('gateInput');
+if (gateInputEl){
+  gateInputEl.addEventListener('keydown', function(e){
+    if (e.key === 'Enter') checkGate();
+  });
+}
+
+(function initGate(){
+  var params = new URLSearchParams(window.location.search);
+  var justPurchased = params.get('purchased') === 'true';
+  var alreadyUnlocked = sessionStorage.getItem(STORAGE_PREFIX_DX + 'unlocked') === 'true';
+  if (justPurchased || alreadyUnlocked){
+    sessionStorage.setItem(STORAGE_PREFIX_DX + 'unlocked', 'true');
+    document.getElementById('gateOverlay').style.display = 'none';
+    document.body.classList.remove('locked');
+    checkPostPurchase();
+  }
+  // Si no se cumple ninguna condición, se queda el overlay del gate visible.
+})();
 
 </script>
 </body>
